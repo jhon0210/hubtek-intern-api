@@ -12,6 +12,14 @@ def list_dogs(limit: int, db: Session):
     return dogs
 
 
+def find_matches(name: str, db: Session):
+    ilike_name = '%' + name + '%'
+    dogs = db.query(models.Dog) \
+            .filter(models.Dog.name.ilike(ilike_name))
+
+    return dogs
+
+
 def create(req: schemas.Dog, db: Session):
     response = requests.get(DOGS_PICTURES_API)
     picture = response.json()['message']
@@ -26,4 +34,21 @@ def create(req: schemas.Dog, db: Session):
     db.commit()
     db.refresh(new_dog)
     return new_dog
+
+
+def update(id, req: schemas.Dog, db: Session):
+    db.query(models.Dog) \
+        .filter(models.Dog.id == id) \
+        .update({
+            'name': req.name,
+        })
+    db.commit()
+
+    return {'message': f'The dog with the id {id} was saved succesfully'}
+
+
+def destroy(id, db: Session):
+    db.query(models.Dog) \
+        .filter(models.Dog.id == id) \
+        .delete(synchcronize_session = False)
 
