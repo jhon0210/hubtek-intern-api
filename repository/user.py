@@ -3,7 +3,6 @@ from fastapi import HTTPException, Response, status
 from sqlalchemy.orm import Session
 
 from .. import models, schemas
-from ..hashing import Hash
 
 
 def list_users(limit: int, db: Session):
