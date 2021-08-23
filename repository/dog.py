@@ -53,3 +53,6 @@ def destroy(id, db: Session):
         .filter(models.Dog.id == id) \
         .delete(synchcronize_session = False)
 
+    db.commit()
+
+    return Response(status_code=status.HTTP_204_NO_CONTENT)
