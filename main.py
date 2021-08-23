@@ -2,7 +2,7 @@ from fastapi import FastAPI
 
 from . import models
 from .database import engine
-from .routers import dog
+from .routers import dog, user
 
 app = FastAPI()
 
