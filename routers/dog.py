@@ -13,8 +13,8 @@ router = APIRouter(
 
 
 @router.get('/', response_model=List[schemas.ShowDog])
-def list_dogs(limit: int=10, active: Optional[bool]=None, db: Session=Depends(get_db)):
-    return dog.list(limit, active, db)
+def list_dogs(limit: int=10, db: Session=Depends(get_db)):
+    return dog.list_dogs(limit, db)
 
 
 @router.get('/{name}', status_code=status.HTTP_200_OK, response_model=schemas.ShowDog)
