@@ -17,9 +17,9 @@ def list_dogs(limit: int=10, db: Session=Depends(get_db)):
     return dog.list_dogs(limit, db)
 
 
-@router.get('/{name}', status_code=status.HTTP_200_OK, response_model=schemas.ShowDog)
-def find_dog(name, res: Response, db: Session=Depends(get_db)):
-    pass
+@router.get('/{name}', status_code=status.HTTP_200_OK, response_model=List[schemas.ShowDog])
+def find_dogs(name, db: Session=Depends(get_db)):
+    return dog.find_matches(name, response)
 
 
 @router.get('/is_adopted', status_code=status.HTTP_200_OK, response_model=schemas.ShowDog)
@@ -32,12 +32,12 @@ def create_dog(req: schemas.Dog, db: Session=Depends(get_db)):
     return dog.create(req, db)
 
 
-@router.put('/{name}', status_code=status.HTTP_202_ACCEPTED)
-def update_dog(name, req: schemas.Dog, db: Session=Depends(get_db)):
-    pass
+@router.put('/{id}', status_code=status.HTTP_202_ACCEPTED)
+def update_dog(id, req: schemas.Dog, db: Session=Depends(get_db)):
+    return dog.update(id, req, db)
 
 
-@router.delete('/{name}', status_code=status.HTTP_204_NO_CONTENT)
+@router.delete('/{id}', status_code=status.HTTP_204_NO_CONTENT)
 def destroy_dog(name, db: Session=Depends(get_db)):
     pass
 
