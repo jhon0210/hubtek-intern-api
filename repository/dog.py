@@ -41,6 +41,7 @@ def update(id, req: schemas.Dog, db: Session):
         .filter(models.Dog.id == id) \
         .update({
             'name': req.name,
+            'is_adopted': req.name
         })
     db.commit()
 
