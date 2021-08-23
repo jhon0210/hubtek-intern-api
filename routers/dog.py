@@ -30,7 +30,7 @@ def find_dogs(
 
 @router.get('/is_adopted', status_code=status.HTTP_200_OK, response_model=schemas.ShowDog)
 def find_adopted_dog(db: Session=Depends(get_db)):
-    pass
+    return dog.show_adopted_dog()
 
 
 @router.post('/', status_code=status.HTTP_201_CREATED, response_model=schemas.ShowDog)
