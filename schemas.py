@@ -9,6 +9,7 @@ class Dog(BaseModel):
 
 
 class ShowDog(BaseModel):
+    id: int
     name: str
     picture: str
     is_adopted: bool
